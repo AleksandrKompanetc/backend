@@ -8,11 +8,15 @@ const server = http.createServer((request, response) => {
 
   switch (request.url) {
     case '/home':
-      const data = fs.readFileSync('pages/home.html') //'best free online'
-      response.write(data)
+      fs.readFile('pages/home.html' (error, data) => {
+        if (error) response.write(error)
+        else response.write(data)
+        response.end()
+      }) //'best free online'
       break
     default:
       response.write('404 Not found')
+      response.end()
   }
 
   response.write('Server work' + requestCount)

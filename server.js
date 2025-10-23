@@ -1,4 +1,5 @@
 const http = require('http')
+const fs = require('fs')
 
 let requestCount = 0
 
@@ -7,7 +8,7 @@ const server = http.createServer((request, response) => {
 
   switch (request.url) {
     case '/home':
-      const data = 'best free online'
+      const data = fs.readFileSync('pages/home.html') //'best free online'
       response.write(data)
       break
     default:
@@ -17,4 +18,4 @@ const server = http.createServer((request, response) => {
   response.write('Server work' + requestCount)
 })
 
-server.listen(3001)
+server.listen(3006)

@@ -2,22 +2,19 @@ const http = require('http')
 
 let requestCount = 0
 
-const server = http.createServer((req, res) => {
+const server = http.createServer((request, response) => {
   requestCount++
 
-  switch(req.url) {
-    case '/students':
-      res.write('STUDENTS')
-      break
-    case '/courses':
-      res.write('FRONT + BACK')
+  switch (request.url) {
+    case '/home':
+      const data = 'best free online'
+      response.write(data)
       break
     default:
-      res.write('404 Not found')
+      response.write('404 Not found')
   }
 
-  res.write('Server work'+ requestCount)
-  res.end()
+  response.write('Server work' + requestCount)
 })
 
-server.listen(3003)
+server.listen(3001)

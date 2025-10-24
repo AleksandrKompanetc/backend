@@ -11,6 +11,15 @@ const delay = (ms) => {
   })
 }
 
+const readFile = (path) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, (err, data) => {
+      if (err) reject(err)
+        else resolve(data)
+    })
+  })
+}
+
 const server = http.createServer((request, response) => {
   requestCount++
 
@@ -23,11 +32,9 @@ const server = http.createServer((request, response) => {
       }) //'best free online'
       break
     case '/about': {
-      delay(3000)
-      setTimeout(() => {
-        response.write('ABOUT')
-        response.end()
-      }, 3000)
+      await delay(3000)
+      response.write('ABOUT')
+      response.end()
       break
     }
     default:

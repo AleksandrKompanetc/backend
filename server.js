@@ -3,6 +3,14 @@ const fs = require('fs')
 
 let requestCount = 0
 
+const delay = (ms) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve()
+  }, ms)
+  })
+}
+
 const server = http.createServer((request, response) => {
   requestCount++
 
@@ -15,6 +23,7 @@ const server = http.createServer((request, response) => {
       }) //'best free online'
       break
     case '/about': {
+      delay(3000)
       setTimeout(() => {
         response.write('ABOUT')
         response.end()

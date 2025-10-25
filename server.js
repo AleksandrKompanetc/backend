@@ -41,6 +41,12 @@ const server = http.createServer(async (request, response) => {
       response.end()
       break
     }
+    case '/api/feedback': {
+      response.statusCode = 400
+      response.setHeader('Content-Type', 'application/json')
+      response.end(JSON.stringify({error: 'incorrect text length'}))
+      break
+    }
     default:
       response.write('404 Not found')
       response.end()
@@ -50,3 +56,5 @@ const server = http.createServer(async (request, response) => {
 })
 
 server.listen(3006)
+
+fetch('http://localhost:3003/api/users/123', {method: 'GET'})

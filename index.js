@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3012;
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -10,14 +10,14 @@ app.get('/about', (req, res) => {
   res.send('About Page');
 })
 
-app.get('/samurai', (req, res) => {
-  res.send('Samurai Page');
+app.get('/samur', (req, res) => {
+  res.send('Hello samurai, Sasha!');
 })
 
-app.post('/samurais', (req, res) => {
-  res.send('We have created a new samurai!');
+app.get('/samurais', (req, res) => {
+  res.send('Hello samurai, Sasha!');
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${post}`)
+  console.log(`Example app listening on port ${port}`)
 })

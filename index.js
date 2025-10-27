@@ -14,6 +14,10 @@ app.get('/samurai', (req, res) => {
   res.send('Samurai Page');
 })
 
+app.post('/samurais', (req, res) => {
+  res.send('We have created a new samurai!');
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${post}`)
 })

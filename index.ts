@@ -1,6 +1,6 @@
-const express = require('express');
+import express = require('express');
 const app = express();
-const port = 3012;
+const port = 3020;
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

@@ -1,9 +1,23 @@
 import express from 'express';
 const app = express();
-const port = 3012;
+const port = 3016;
 
-app.get('/', (req, res) => {
-  res.json({message: 'IT-INCUBATOR'});
+app.get('/courses', (req, res) => {
+  res.json([
+    { id: 1, title: 'Frontend' },
+    { id: 2, title: 'Backend' },
+    { id: 3, title: 'Fullstack' },
+    { id: 4, title: 'DevOps' }
+  ]);
+})
+
+app.get('/courses/:id', (req, res) => {
+  res.json([
+    { id: 1, title: 'Frontend' },
+    { id: 2, title: 'Backend' },
+    { id: 3, title: 'Fullstack' },
+    { id: 4, title: 'DevOps' }
+  ]).find(c => c.id === +req.params.id);
 })
 
 app.listen(port, () => {

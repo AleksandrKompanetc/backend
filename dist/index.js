@@ -1,13 +1,16 @@
 import express from 'express';
 const app = express();
 const port = 3016;
-app.get('/courses', (req, res) => {
-    res.json([
+const db = {
+    courses: [
         { id: 1, title: 'Frontend' },
         { id: 2, title: 'Backend' },
         { id: 3, title: 'Fullstack' },
         { id: 4, title: 'DevOps' }
-    ]);
+    ]
+};
+app.get('/courses', (req, res) => {
+    res.json(db.courses);
 });
 app.get('/courses/:id', (req, res) => {
     const foundCourse = [

@@ -13,12 +13,7 @@ app.get('/courses', (req, res) => {
     res.json(db.courses);
 });
 app.get('/courses/:id', (req, res) => {
-    const foundCourse = [
-        { id: 1, title: 'Frontend' },
-        { id: 2, title: 'Backend' },
-        { id: 3, title: 'Fullstack' },
-        { id: 4, title: 'DevOps' }
-    ].find(c => c.id === +req.params.id);
+    const foundCourse = db.courses.find(c => c.id === +req.params.id);
     if (!foundCourse) {
         res.sendStatus(404);
         return;

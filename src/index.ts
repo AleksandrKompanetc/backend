@@ -11,7 +11,16 @@ const db = {
 }
 
 app.get('/courses', (req, res) => {
-  res.json(db.courses);
+  let foundCourses = db.courses;
+  if (req.query.title) {
+    foundCourses = foundCourses.filter(c => c.title.toLowerCase().indexOf((req.query.title as string).toLowerCase()) > -1);
+  }
+
+  if (!foundCourses.length) {
+    res.sendStatus(404);
+    return;
+  }
+  res.json(foundCourses);
 })
 
 app.get('/courses/:id', (req, res) => {

@@ -2,6 +2,9 @@ import express from 'express';
 const app = express();
 const port = 3016;
 
+const jsonBodyMiddleware = express.json();
+app.use(jsonBodyMiddleware);
+
 const db = {
   courses: [
     { id: 1, title: 'Frontend' },
@@ -37,7 +40,7 @@ app.get('/courses/:id', (req, res) => {
 app.post('/courses', (req, res) => {
   const createdCourse = {
     id: +(new Date()),
-    title: 'unknown',
+    title: req.body.title,
   }
   db.courses.push(createdCourse);
   res.json(createdCourse);

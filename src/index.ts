@@ -43,13 +43,19 @@ app.post('/courses', (req, res) => {
     res.sendStatus(400);
     return;
   }
-  
+
   const createdCourse = {
     id: +(new Date()),
     title: req.body.title,
   }
   db.courses.push(createdCourse);
+  res.status(201);
   res.json(createdCourse);
+})
+
+app.delete('/courses/:id', (req, res) => {
+  db.courses = db.courses.filter(c => c.id !== +req.params.id);
+  res.sendStatus(204);
 })
 
 app.listen(port, () => {

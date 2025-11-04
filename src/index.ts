@@ -16,10 +16,11 @@ app.get('/courses', (req, res) => {
     foundCourses = foundCourses.filter(c => c.title.toLowerCase().indexOf((req.query.title as string).toLowerCase()) > -1);
   }
 
-  if (!foundCourses.length) {
-    res.sendStatus(404);
-    return;
-  }
+  // if (!foundCourses.length) {
+  //   res.sendStatus(404);
+  //   return;
+  // }
+
   res.json(foundCourses);
 })
 
@@ -31,6 +32,15 @@ app.get('/courses/:id', (req, res) => {
     return;
   }
   res.json(foundCourse);
+})
+
+app.post('/courses', (req, res) => {
+  const createdCourse = {
+    id: +(new Date()),
+    title: 'unknown',
+  }
+  db.courses.push(createdCourse);
+  res.json(createdCourse);
 })
 
 app.listen(port, () => {

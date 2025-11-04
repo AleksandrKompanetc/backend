@@ -58,6 +58,18 @@ app.delete('/courses/:id', (req, res) => {
   res.sendStatus(204);
 })
 
+app.put('courses/:id', (req, res) => {
+  const foundCourse = db.courses.find(c => c.id === +req.params.id);
+
+  if (!foundCourse) {
+    res.sendStatus(404);
+    return;
+  }
+
+  foundCourse.title = req.body.title;
+  res.json(foundCourse);
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 })

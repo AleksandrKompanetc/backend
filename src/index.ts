@@ -38,6 +38,12 @@ app.get('/courses/:id', (req, res) => {
 })
 
 app.post('/courses', (req, res) => {
+
+  if (!req.body.title) {
+    res.sendStatus(400);
+    return;
+  }
+  
   const createdCourse = {
     id: +(new Date()),
     title: req.body.title,

@@ -59,6 +59,11 @@ app.delete('/courses/:id', (req, res) => {
 })
 
 app.put('courses/:id', (req, res) => {
+  if (!req.body.title) {
+    res.sendStatus(400);
+    return;
+  }
+
   const foundCourse = db.courses.find(c => c.id === +req.params.id);
 
   if (!foundCourse) {
@@ -67,7 +72,7 @@ app.put('courses/:id', (req, res) => {
   }
 
   foundCourse.title = req.body.title;
-  res.json(foundCourse);
+  res.sendStatus(204);
 })
 
 app.listen(port, () => {

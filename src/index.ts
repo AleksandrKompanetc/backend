@@ -40,7 +40,7 @@ app.get('/courses/:id', (req, res) => {
   const foundCourse = db.courses.find(c => c.id === +req.params.id);
 
   if (!foundCourse) {
-    res.sendStatus(404);
+    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
     return;
   }
   res.json(foundCourse);
@@ -49,7 +49,7 @@ app.get('/courses/:id', (req, res) => {
 app.post('/courses', (req, res) => {
 
   if (!req.body.title) {
-    res.sendStatus(400);
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
@@ -58,30 +58,30 @@ app.post('/courses', (req, res) => {
     title: req.body.title,
   }
   db.courses.push(createdCourse);
-  res.status(201);
+  res.status(HTTP_STATUSES.CREATED_201);
   res.json(createdCourse);
 })
 
 app.delete('/courses/:id', (req, res) => {
   db.courses = db.courses.filter(c => c.id !== +req.params.id);
-  res.sendStatus(204);
+  res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 })
 
 app.put('courses/:id', (req, res) => {
   if (!req.body.title) {
-    res.sendStatus(400);
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
     return;
   }
 
   const foundCourse = db.courses.find(c => c.id === +req.params.id);
 
   if (!foundCourse) {
-    res.sendStatus(404);
+    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
     return;
   }
 
   foundCourse.title = req.body.title;
-  res.sendStatus(204);
+  res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 })
 
 app.listen(port, () => {
